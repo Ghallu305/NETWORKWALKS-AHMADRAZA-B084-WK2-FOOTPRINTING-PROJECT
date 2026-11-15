@@ -1,48 +1,77 @@
 # PENETRATION TESTING REPORT
-## FOOTPRINTING & NETWORK SCANNING PHASES
-### W2-PM-FINAL | CYBERSECURITY | NETWORKWALKS
+## FOOTPRINTING & NETWORK SCANNING - WEEK 2
 
-| Field | Detail |
-| :--- | :--- |
-| **Pentester Name** | Ahmad Raza |
-| **GitHub** | Ghallu305 |
-| **University** | Virtual University |
-| **Program/Batch** | B084 - NetworkWalks |
-| **Date** | 15 November 2026 |
-| **Modules Completed** | W2-PM1 - Multiple Kali Tools; W2-PM5 - Zenmap Scanning |
-| **Client/Target** | 1. testphp.vulnweb.com (instructor-authorized educational exercise) 2. 127.0.0.1 - Own localhost |
-| **Permission Secured?** | Instructor approval for the assigned domain exercise; own localhost for local scanning |
-| **Phases Covered** | Phase 1: Reconnaissance & Footprinting; Phase 2: Scanning & Network Discovery |
+**Name:** Ahmad
+**Lab:** Kali Linux
+**Target:** testphp.vulnweb.com (Intentionally Vulnerable Site), google.com, localhost
 
-## 1. Liability Disclaimer
-I have performed these activities only on systems and networks that were within the authorized scope of my educational exercises or that I personally own or control.
+---
 
-The activities documented in this report were conducted for educational and cybersecurity learning purposes as part of the NetworkWalks program.
+## 1. SELECTED MODULES
 
-The footprinting exercise against testphp.vulnweb.com was performed with instructor approval. The Zenmap network scanning exercise was performed on my own localhost.
+| Type | Module | Status |
+| :--- | :--- | :--- |
+| Elective | W2-PM1 - Footprinting with multiple Kali tools | Completed |
+| Elective | W2-PM2 - GHDB based Footprinting Attacks | Completed |
+| Mandatory | W2-PM5 - Zenmap based Network Scanning | Completed |
+| Mandatory | W2-PM-FINAL - Detailed Report (This Report) | Completed |
 
-No exploitation, unauthorized access, or intentional disruption of services was performed.
+Requirement was: Minimum 1 Elective + 2 Mandatory = 3 Modules. I completed 4 Modules.
 
-## 2. Introduction
-This report covers the practical cybersecurity activities completed during Week 2 of the NetworkWalks Cybersecurity & Ethical Hacking program.
+---
 
-The project focuses on two main areas:
+## 2. W2-PM1 - FOOTPRINTING WITH MULTIPLE KALI TOOLS
 
-**W2-PM1 - Footprinting and Reconnaissance Using Multiple Kali Linux Tools**
-This module involved using Kali Linux tools to collect publicly observable information about the target domain.
+### 2.1 Ping Test
+**Result:** 2 packets transmitted, 2 received, 0% packet loss
+rtt min/avg/max = 44.804 / 46.605 / 48.407 ms
+**Conclusion:** Target is live and connection is stable.
 
-**W2-PM5 - Network Scanning with Zenmap**
-This module involved using Zenmap on Kali Linux to discover live hosts, identify open ports, and perform service version detection.
+### 2.2 Nmap on Localhost
+**Step 1:**
+Result: All 1000 scanned ports are closed.
 
-## 3. Tools Used
-| Tool | Purpose |
-| :--- | :--- |
-| Kali Linux | Operating system used for footprinting activities |
-| Zenmap / Nmap | Network scanning, host discovery, service detection |
-| Nmap -sV | Service version detection |
-| Python http.server | To start a local test web service on port 8000 |
+**Step 2:**
+Result: `8000/tcp open http SimpleHTTPServer 0.6 (Python 3.13.12)`
+**Conclusion:** Nmap correctly detected closed port first, then open port after starting the server.
 
-## 4. Methodology
+### 2.3 Nmap on testphp.vulnweb.com
+This shows open ports, services and versions of the target.
 
-### 4.1 External Scan - testphp.vulnweb.com
-Command Used:
+---
+
+## 3. W2-PM2 - GHDB / GOOGLE DORKING
+
+This is Passive Footprinting.
+
+| No. | Google Dork | What I Found |
+| :--- | :--- | :--- |
+| 1 | site:testphp.vulnweb.com filetype:pdf | PDF Report found |
+| 2 | site:testphp.vulnweb.com inurl:login | login.php found |
+| 3 | site:testphp.vulnweb.com inurl:admin | /admin/ found |
+| 4 | site:testphp.vulnweb.com intitle:"index of" | No open directory found |
+| 5 | site:testphp.vulnweb.com inurl:php?id= | listproducts.php?id= , artists.php?id= found |
+
+**Conclusion:** With Google Dorking, an attacker can find login, admin and parameter pages without scanning.
+
+---
+
+## 4. W2-PM5 - ZENMAP BASED NETWORK SCANNING
+
+Zenmap is the GUI version of Nmap.
+- Opened Zenmap
+- Target: testphp.vulnweb.com / 127.0.0.1
+- Profile: Intense Scan / Service Version Scan selected
+- Ran scan and checked Host Details and Topology
+
+**Result:** Zenmap gave the same result as Nmap command line. GUI made it easier to understand.
+
+---
+
+## 5. OVERALL CONCLUSION
+
+In this week, I learned both Passive (Google Dorking) and Active (Ping, Nmap, Zenmap) Footprinting. All work was done for learning purpose only, on an intentionally vulnerable lab site.
+
+## 6. ETHICAL NOTE
+
+Do not use these tools on any real website without written permission.
