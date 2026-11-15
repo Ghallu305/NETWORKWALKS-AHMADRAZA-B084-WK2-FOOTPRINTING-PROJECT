@@ -1,7 +1,7 @@
 # PENETRATION TESTING REPORT
 ## FOOTPRINTING & NETWORK SCANNING - WEEK 2
 
-**Name:** Ahmad
+**Name:** Ahmad Raza
 **Lab:** Kali Linux
 **Target:** testphp.vulnweb.com (Intentionally Vulnerable Site), google.com, localhost
 
